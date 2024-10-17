@@ -45,9 +45,11 @@ pip install -r requirements.txt
 
 # Simulation Environment Test
 ## Keyboard Control Test
-Under `gym_dcmm/envs/`, run
+Under `gym_dcmm/envs/`, run:
 
-`python3 DcmmVecEnv.py`
+```bash
+python3 DcmmVecEnv.py
+```
 
 Keyboard control:
 
@@ -95,11 +97,11 @@ We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regar
     * `viewer (bool)`: Launch the Mujoco viewer or not;
     * `imshow_cam (bool)`: Visualize the camera scene or not;
     * `object_eval (bool)`: Use the unseen objects or not;
-2. `configs/DcmmPPO.yaml`:
+2. `configs/train/DcmmPPO.yaml`:
     * `minibatch_size`: The batch size for network input during PPO training;
     * `horizon_length`: The number of steps collected in a single trajectory during exploration;
 
-    **Note**: In the training mode, must satisfy: `num_envs` * `horizon_length` = n * `minibatch_size`, where n is a positive integer;
+    **Note**: In the training mode, must satisfy: `num_envs` * `horizon_length` = n * `minibatch_size`, where n is a positive integer.
 
 ## Two-Stage Training From Scratch
 ### Stage 1: Tracking Task
@@ -136,7 +138,7 @@ python3 train_DCMM.py test=True task=Tracking num_env=1 checkpoint_tracking=$(pa
 ```bash
 python3 train_DCMM.py test=True task=Catching_TwoStage num_env=1 checkpoint_catching=$(path_to_catching_model) object_eval=True
 ```
-# Real-World Deployment
+# Real-Robot Deployment
 ## System Overview
 <div style="display: flex; align-items: center;">
     <img src="./assets/media/imgs/real_robot.png" alt="real_robot" style="margin-right: 10px;">
@@ -160,7 +162,7 @@ You can create an issue if you meet any bugs.
   ```
 
 
-# BibTeX
+# Citation
 
 Please consider citing our paper if you find this repo useful:
 ```bibtex
@@ -172,7 +174,3 @@ Please consider citing our paper if you find this repo useful:
 }
 
 ```
-
-## Acknowledgement
-
-We thank the authors of the following repos for their great work: [minimal-stable-PPO](https://github.com/ToruOwO/minimal-stable-PPO), [Holistic Mobile Manipulation](https://jhavl.github.io/holistic/).
