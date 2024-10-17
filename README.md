@@ -1,9 +1,11 @@
 # [Catch It! Learning to Catch in Flight with Mobile Dexterous Hands](https://mobile-dex-catch.github.io/)
 Official implementation of [Catch It](https://arxiv.org/abs/2409.10319). 
 
-![teaser](https://github.com/hang0610/catch/blob/main/assets/videos/teaser.mp4 'teaser')
+![teaser](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/teaser.mp4 'teaser')
 
 We open-source the simulation training scripts and provide guidances to the real-robot deployment. We name the environment with **D**exterous **C**atch with **M**obile **M**anipulation (**DCMM**).
+
+This codebase is under [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/deed.en), with inherited license in [Legged Gym](training/legged_gym) and [RSL RL](training/rsl_rl) from *ETH Zurich, Nikita Rudin* and *NVIDIA CORPORATION & AFFILIATES*.
 
 # Installation
 - Create conda environment and install pytorch:
@@ -61,6 +63,7 @@ Keyboard control:
 **Note**: DO NOT change the speed of the mobile base too dramatically, or it might tip over.
 
 # Simulation Training
+![train](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/train.mp4 'train')
 ## Training/Testing Settings
 We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regarding the efficiency, it is recommended to use at least 16 CPUs to create over 32 parallel environments during training.
 1. `configs/config.yaml`: 
@@ -127,16 +130,28 @@ python3 train_DCMM.py test=True task=Tracking num_env=1 checkpoint_tracking=$(pa
 ```bash
 python3 train_DCMM.py test=True task=Catching_TwoStage num_env=1 checkpoint_catching=$(path_to_catching_model) object_eval=True
 ```
+# Real-World Deployment
+## System Overview
+TODO
 
+## Deployment Code
+TODO
 
 # Liscence
 
 This code base is under [MIT License](https://opensource.org/license/mit).
 
-## BibTeX
+# Trouble Shooting
+## Contact
+Yuanhang Zhang: yuanhanz@andrew.cmu.edu
+
+## Issues
+You can create an issue if you meet any bugs.
+
+# BibTeX
 
 Please consider citing our paper if you find this repo useful:
-```
+```bibtex
 @article{zhang2024catchitlearningcatch,
   title={Catch It! Learning to Catch in Flight with Mobile Dexterous Hands},
   author={Zhang, Yuanhang and Liang, Tianhai and Chen, Zhenyang and Ze, Yanjie and Xu, Huazhe},
