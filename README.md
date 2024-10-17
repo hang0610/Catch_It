@@ -138,14 +138,14 @@ python3 train_DCMM.py test=True task=Catching_TwoStage num_env=1 checkpoint_catc
 ```
 # Real-World Deployment
 ## System Overview
+<div style="display: flex; align-items: center;">
+    <img src="./assets/media/imgs/real_robot.png" alt="real_robot" style="margin-right: 10px;">
+</div>
+
 TODO
 
 ## Deployment Code
 TODO
-
-# Liscence
-
-This code base is under [MIT License](https://opensource.org/license/mit).
 
 # Trouble Shooting
 ## Contact
@@ -153,6 +153,12 @@ Yuanhang Zhang: yuanhanz@andrew.cmu.edu
 
 ## Issues
 You can create an issue if you meet any bugs.
+
+* If some mujoco rendering errors happen, try adding the following line before `main()` in the `train_DCMM.py`:
+  ```python
+  os.environ['MUJOCO_GL'] = 'egl'
+  ```
+
 
 # BibTeX
 
