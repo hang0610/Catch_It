@@ -1,7 +1,7 @@
 # [Catch It! Learning to Catch in Flight with Mobile Dexterous Hands](https://mobile-dex-catch.github.io/)
 Official implementation of [Catch It](https://arxiv.org/abs/2409.10319). 
 
-![teaser](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/teaser.mp4 'teaser')
+![teaser](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/teaser.gif)
 
 We open-source the simulation training scripts and provide guidances to the real-robot deployment. We name the environment with **D**exterous **C**atch with **M**obile **M**anipulation (**DCMM**).
 
@@ -63,7 +63,8 @@ Keyboard control:
 **Note**: DO NOT change the speed of the mobile base too dramatically, or it might tip over.
 
 # Simulation Training
-![train](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/train.mp4 'train')
+![train](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/train.gif)
+
 ## Training/Testing Settings
 We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regarding the efficiency, it is recommended to use at least 16 CPUs to create over 32 parallel environments during training.
 1. `configs/config.yaml`: 
