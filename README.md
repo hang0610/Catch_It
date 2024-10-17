@@ -1,7 +1,9 @@
 # [Catch It! Learning to Catch in Flight with Mobile Dexterous Hands](https://mobile-dex-catch.github.io/)
 Official implementation of [Catch It](https://arxiv.org/abs/2409.10319). 
 
-![teaser](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/teaser.gif)
+<div style="display: flex; align-items: center;">
+    <img src="./assets/media/videos/teaser.gif" alt="teaser" style="margin-right: 10px;">
+</div>
 
 We open-source the simulation training scripts and provide guidances to the real-robot deployment. We name the environment with **D**exterous **C**atch with **M**obile **M**anipulation (**DCMM**).
 
@@ -63,18 +65,14 @@ Keyboard control:
 **Note**: DO NOT change the speed of the mobile base too dramatically, or it might tip over.
 
 # Simulation Training
-![train](https://github.com/hang0610/catch_it/blob/main/assets/media/videos/train.gif)
+<div style="display: flex; align-items: center;">
+    <img src="./assets/media/videos/train.gif" alt="train" style="margin-right: 10px;">
+</div>
 
 ## Training/Testing Settings
 We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regarding the efficiency, it is recommended to use at least 16 CPUs to create over 32 parallel environments during training.
 1. `configs/config.yaml`: 
-    * `num_envs (int)`: the number of paralleled environments;
-    * `task (str)`: task type (Tracking or Catching);
-    * `test (bool)`: Setting to True enables testing mode, while setting to False enables training mode;
-    * `checkpoint_tracking/catching (str)`: Load the pre-trained model for training/testing;
-    * `viewer (bool)`: Launch the Mujoco viewer or not;
-    * `imshow_cam (bool)`: Visualize the camera scene or not;
-    * `object_eval (bool)`: Use the unseen objects or not;
+
     ```yaml
     # Disables viewer or camera visualization
     viewer: False
@@ -90,6 +88,13 @@ We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regar
     # checkpoint_tracking: 'assets/models/track.pth'
     # checkpoint_catching: 'assets/models/catch_two_stage.pth'
     ```
+    * `num_envs (int)`: the number of paralleled environments;
+    * `task (str)`: task type (Tracking or Catching);
+    * `test (bool)`: Setting to True enables testing mode, while setting to False enables training mode;
+    * `checkpoint_tracking/catching (str)`: Load the pre-trained model for training/testing;
+    * `viewer (bool)`: Launch the Mujoco viewer or not;
+    * `imshow_cam (bool)`: Visualize the camera scene or not;
+    * `object_eval (bool)`: Use the unseen objects or not;
 2. `configs/DcmmPPO.yaml`:
     * `minibatch_size`: The batch size for network input during PPO training;
     * `horizon_length`: The number of steps collected in a single trajectory during exploration;
