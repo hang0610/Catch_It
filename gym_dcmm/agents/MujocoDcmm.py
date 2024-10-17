@@ -1,4 +1,9 @@
-# Author: Yuanhang Zhang (yuanhang0610@gmail.com)
+"""
+Author: Yuanhang Zhang
+Version@2024-10-17
+All Rights Reserved
+ABOUT: this file constains the basic class of the DexCatch with Mobile Manipulation (DCMM) in the MuJoCo simulation environment.
+"""
 import os, sys
 sys.path.append(os.path.abspath('../'))
 import copy

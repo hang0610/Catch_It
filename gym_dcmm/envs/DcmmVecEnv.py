@@ -1,8 +1,13 @@
-# Author: Yuanhang Zhang (yuanhang0610@gmail.com)
+"""
+Author: Yuanhang Zhang
+Version@2024-10-17
+All Rights Reserved
+ABOUT: this file constains the RL environment for the DCMM task
+"""
 import os, sys
 sys.path.append(os.path.abspath('../'))
 sys.path.append(os.path.abspath('./gym_dcmm/'))
-import os
+import argparse
 import math
 print(os.getcwd())
 import configs.env.DcmmCfg as DcmmCfg
@@ -996,11 +1001,16 @@ class DcmmVecEnv(gym.Env):
 
 if __name__ == "__main__":
     os.chdir('../../')
+    parser = argparse.ArgumentParser(description="Args for DcmmVecEnv")
+    parser.add_argument('--viewer', action='store_true', help="open the mujoco.viewer or not")
+    parser.add_argument('--imshow_cam', action='store_true', help="imshow the camera image or not")
+    args = parser.parse_args()
+    print("args: ", args)
     env = DcmmVecEnv(task='Catching', object_name='object', render_per_step=False, 
                     print_reward=False, print_info=False, 
                     print_contacts=False, print_ctrl=False, 
                     print_obs=False, camera_name = ["top"],
-                    render_mode="rgb_array", imshow_cam=False, 
-                    viewer = False, object_eval=False,
+                    render_mode="rgb_array", imshow_cam=args.imshow_cam, 
+                    viewer = args.viewer, object_eval=False,
                     env_time = 2.5, steps_per_policy=20)
     env.run_test()

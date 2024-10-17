@@ -8,6 +8,9 @@ Official implementation of [Catch It](https://arxiv.org/abs/2409.10319).
 We open-source the simulation training scripts and provide guidances to the real-robot deployment. We name the environment with **D**exterous **C**atch with **M**obile **M**anipulation (**DCMM**).
 
 This codebase is under [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/deed.en), with inherited license in [Legged Gym](training/legged_gym) and [RSL RL](training/rsl_rl) from *ETH Zurich, Nikita Rudin* and *NVIDIA CORPORATION & AFFILIATES*.
+## News
+
+- **2024-10-17**: Release the simulation training scripts and references for the real-robot depolyment. Have a try!
 
 # Installation
 - Create conda environment and install pytorch:
@@ -48,7 +51,7 @@ pip install -r requirements.txt
 Under `gym_dcmm/envs/`, run:
 
 ```bash
-python3 DcmmVecEnv.py
+python3 DcmmVecEnv.py --viewer
 ```
 
 Keyboard control:
