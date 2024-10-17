@@ -3,18 +3,14 @@ imageio
 termcolor
 decorators
 opencv-python
-matplotlib
-# roboticstoolbox-python
 spatialmath-python
 scipy
 qpsolvers
 quadprog
 numpy-quaternion
-pyarrow
-pandas
 seaborn
-tqdm
-pygame
-transforms3d
 PyYAML==6.0
-omagaconf
+omegaconf
+hydra-core
+wandb
+tensorboardX

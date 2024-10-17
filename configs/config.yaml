@@ -22,10 +22,10 @@ checkpoint_catching: ''
 # checkpoint_tracking: 'assets/models/track.pth'
 # checkpoint_catching: 'assets/models/catch_two_stage.pth'
 
-# output dir name
+# wandb config
 output_name: Dcmm
 wandb_mode: "disabled"  # "online" | "offline" | "disabled"
-wandb_entity: ''
+wandb_entity: 'Your_username'
 # wandb_project: 'RL_Dcmm_Track_Random'
 wandb_project: 'RL_Dcmm_Catch_Random'
 

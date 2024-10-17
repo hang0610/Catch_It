@@ -5,7 +5,6 @@ import torch
 import os
 import random
 import wandb
-import argparse
 from hydra.utils import to_absolute_path
 from omegaconf import DictConfig, OmegaConf
 from termcolor import cprint

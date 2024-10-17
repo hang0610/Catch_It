@@ -18,7 +18,7 @@ pip install torch torchvision torchaudio
 ```
 - Clone this repo and install our `gym_dcmm`:
 ```
-git clone https://github.com/hang0610/Catch_It.git
+git clone https://github.com/hang0610/catch_it.git
 cd catch_it && pip install -e .
 ```
 - Install additional packages in `requirements.txt`:
@@ -66,13 +66,13 @@ Keyboard control:
 
 **Note**: DO NOT change the speed of the mobile base too dramatically, or it might tip over.
 
-# Simulation Training
+# Simulation Training/Testing
 <div style="display: flex; align-items: center;">
     <img src="./assets/media/videos/train.gif" alt="train" style="margin-right: 10px;">
 </div>
 
 ## Training/Testing Settings
-We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regarding the efficiency, it is recommended to use at least 16 CPUs to create over 32 parallel environments during training.
+We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regarding the efficiency, it is recommended to use at least 12 CPUs to create over 16 parallel environments during training.
 1. `configs/config.yaml`: 
 
     ```yaml
@@ -103,60 +103,82 @@ We utilize 64 CPUs and a single Nvidia RTX 3070 Ti GPU for model training. Regar
 
     **Note**: In the training mode, must satisfy: `num_envs` * `horizon_length` = n * `minibatch_size`, where n is a positive integer.
 
+## Testing
+We provide our tracking model and catching model trained in a two-stage manner, which are `assets/models/track.pth` and `assets/models/catch_two_stage.pth`. You can test them for the tracking and catching task. Also, You can choose to evaluate on the training objects or the unseen objects by setting `object_eval`.
+
+### Testing on the Tracking Task
+Under the root `catch_it`:
+```bash
+python3 train_DCMM.py test=True task=Tracking num_envs=1 checkpoint_tracking=$(path_to_tracking_model) object_eval=True viewer=$(open_mujoco_viewer_or_not) imshow_cam=$(imshow_camera_or_not)
+```
+### Testing on the Catching Task
+```bash
+python3 train_DCMM.py test=True task=Catching_TwoStage num_envs=1 checkpoint_catching=$(path_to_catching_model) object_eval=True viewer=$(open_mujoco_viewer_or_not) imshow_cam=$(imshow_camera_or_not)
+```
+
 ## Two-Stage Training From Scratch
 ### Stage 1: Tracking Task
-Train the base and arm to **track** the randomly thrown objects:
+Under the root `catch_it`, train the base and arm to **track** the randomly thrown objects:
 ```bash
-python3 train_DCMM.py test=False task=Tracking num_env=$(number_of_CPUs)
+python3 train_DCMM.py test=False task=Tracking num_envs=$(number_of_CPUs)
 ```
 
 ### Stage 2: Catching Task
 * Firts, load the tracking model from stage 1, and fill its path to the `checkpoint_tracking` in `configs/config.yaml`.
 
-  We provide our tracking model, which is `assets/model/track.pth`, which can be used to train the catching task (stage 2) directly.
+  We provide our tracking model, which is `assets/models/track.pth`, which can be used to train the catching task (stage 2) directly.
 
 * Second, train the whole body (the base, arm and hand) to **catch** the randomly thrown objects:
   ```bash
-  python3 train_DCMM.py test=False task=Catching_TwoStage num_env=$(number_of_CPUs) checkpoint_tracking=$(path_to_tracking_model)
+  python3 train_DCMM.py test=False task=Catching_TwoStage num_envs=$(number_of_CPUs) checkpoint_tracking=$(path_to_tracking_model)
   ``` 
 
 ## One-Stage Training From Scratch
 In the one-stage training baseline, we don't pre-train a tracking model but directly train a catching model from scratch. Similar to the setting of training tracking model, run:
 ```bash
-python3 train_DCMM.py test=False task=Catching_OneStage num_env=$(number_of_CPUs)
+python3 train_DCMM.py test=False task=Catching_OneStage num_envs=$(number_of_CPUs)
+```
+## Logger
+You can visualize the training curves and metrics via `wandb`. In `configs/config.yaml`:
+```yaml
+# wandb config
+output_name: Dcmm
+wandb_mode: "disabled"  # "online" | "offline" | "disabled"
+wandb_entity: 'Your_username'
+# wandb_project: 'RL_Dcmm_Track_Random'
+wandb_project: 'RL_Dcmm_Catch_Random'
 ```
 
-
-## Testing
-We provide our tracking model and catching model trained in a two-stage manner, which are `assets/model/track.pth` and `assets/model/catch_two_stage.pth`. You can test them for the tracking and catching task. You can choose to evaluate on the training objects or the unseen objects by setting `object_eval`.
-
-### Test on the Tracking Task
-```bash
-python3 train_DCMM.py test=True task=Tracking num_env=1 checkpoint_tracking=$(path_to_tracking_model) object_eval=True
-```
-### Test on the Catching Task
-```bash
-python3 train_DCMM.py test=True task=Catching_TwoStage num_env=1 checkpoint_catching=$(path_to_catching_model) object_eval=True
-```
 # Real-Robot Deployment
 ## System Overview
 <div style="display: flex; align-items: center;">
     <img src="./assets/media/imgs/real_robot.png" alt="real_robot" style="margin-right: 10px;">
 </div>
+<br>
 
-TODO
+
+* Mobile Base: [Ranger Mini V2](https://global.agilex.ai/products/ranger-mini)
+* Arm: [XArm6](https://www.ufactory.cc/xarm-collaborative-robot/)
+* Dexterous Hand: [LEAP Hand](https://leaphand.com/)
+* Perception: [Realsense D455](https://www.intelrealsense.com/depth-camera-d455/)
+* Onboard Computer: [Thunderobot MIX MiniPC](https://www.amazon.com/WEELIAO-ThundeRobot-Desktop-i7-13620H-Bluetooth/dp/B0CZ91ZVK3)
 
 ## Deployment Code
-TODO
+Our code is build upon Ubuntu 20.04, ROS Noetic. Lower or higher version may also work (not guaranteed).
+* Ranger Mini V2: [ranger_ros](https://github.com/agilexrobotics/ranger_ros)
+* XArm6: [xarm-ros](https://github.com/xArm-Developer/xarm_ros)
+* LEAP Hand: [LEAP Hand ROS1 SDK](https://github.com/leap-hand/LEAP_Hand_API/tree/main/ros_module)
+* Realsense D455: [realsense-ros](https://github.com/IntelRealSense/realsense-ros) and [realsense-sdk](https://github.com/IntelRealSense/librealsense)
+* Camera Calibration: [easy_handeye](https://github.com/IFL-CAMP/easy_handeye)
 
 # Trouble Shooting
 ## Contact
 Yuanhang Zhang: yuanhanz@andrew.cmu.edu
 
 ## Issues
-You can create an issue if you meet any bugs.
+You can create an issue if you meet any other bugs.
 
-* If some mujoco rendering errors happen, try adding the following line before `main()` in the `train_DCMM.py`:
+* If some mujoco rendering errors happen `mujoco.FatalError: gladLoadGL error`, try adding the following line before `main()` in the `train_DCMM.py` and `gym_dcmm/envs/DcmmVecEnv.py`:
   ```python
   os.environ['MUJOCO_GL'] = 'egl'
   ```
@@ -172,5 +194,4 @@ Please consider citing our paper if you find this repo useful:
   year={2024},
   journal={arXiv preprint arXiv:2409.10319}
 }
-
 ```

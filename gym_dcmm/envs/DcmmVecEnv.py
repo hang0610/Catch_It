@@ -1001,6 +1001,6 @@ if __name__ == "__main__":
                     print_contacts=False, print_ctrl=False, 
                     print_obs=False, camera_name = ["top"],
                     render_mode="rgb_array", imshow_cam=False, 
-                    viewer = True, object_eval=False,
+                    viewer = False, object_eval=False,
                     env_time = 2.5, steps_per_policy=20)
     env.run_test()
