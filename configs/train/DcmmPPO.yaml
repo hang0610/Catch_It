@@ -1,0 +1,46 @@
+seed: ${..seed}
+algo: PPO
+
+network:
+  mlp:
+    units: [256, 128]
+    # units_track: [512, 256, 128]
+    # units_catch: [128, 64]
+  separate_value_mlp: True
+
+ppo:
+  name: ${resolve_default:Dcmm,${...experiment}}
+  normalize_input: True
+  normalize_value: True
+  value_bootstrap: True
+  num_actors: ${resolve_default:1,${...num_envs}}
+  reward_scale_value: 0.1
+  clip_value_loss: False
+  normalize_advantage: True
+  gamma: 0.99
+  tau: 0.95
+  learning_rate: 5e-4
+  lr_schedule: kl  # 'fixed' | 'linear' | 'kl' | 'cos'
+  kl_threshold: 0.016
+  save_best_after: 500
+  save_frequency: 2000
+  grad_norm: 1.0
+  entropy_coef: 0.0
+  freeze_base: False
+  freeze_arm: False
+  truncate_grads: True
+  e_clip: 0.2
+  action_track_denorm: [1.5, 0.025, 0.01] # 1.5 for the base action, 0.025 for the end-effector action, 0.15 for the hand action
+  # action_catch_denorm: [0.25, 0.01, 0.15] # 1.5 for the base action, 0.025 for the end-effector action, 0.15 for the hand action
+  action_catch_denorm: [1.5, 0.025, 0.15]
+  horizon_length: 64
+  minibatch_size: 128
+  mini_epochs: 6
+  critic_coef: 4
+  clip_value: True
+  bounds_loss_coef: 0.0001
+  max_agent_steps: 25000000
+  test_num_episodes: 100
+  max_test_steps: 10000
+  img_dim: [112, 112]
+  num_frames: 2

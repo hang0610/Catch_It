@@ -1,0 +1,41 @@
+# experiment name. defaults to name of training config
+experiment: ''
+# seed - set to -1 to choose random seed
+seed: -1
+# set to True for deterministic performance
+torch_deterministic: False
+## Device config
+rl_device: ???
+device_id: 0  # 'cuda:?', -1 for 'cpu'
+
+# Disables viewer or camera visualization
+viewer: False
+imshow_cam: False
+# RL Arguments
+test: False # False, True
+task: Tracking # Catching_TwoStage, Catching_OneStage, Tracking
+num_envs: 32 # This should be no more than 2x your CPUs (1x is recommended)
+object_eval: False
+# used to set checkpoint path
+checkpoint_tracking: ''
+checkpoint_catching: ''
+# checkpoint_tracking: 'assets/models/track.pth'
+# checkpoint_catching: 'assets/models/catch_two_stage.pth'
+
+# output dir name
+output_name: Dcmm
+wandb_mode: "disabled"  # "online" | "offline" | "disabled"
+wandb_entity: ''
+# wandb_project: 'RL_Dcmm_Track_Random'
+wandb_project: 'RL_Dcmm_Catch_Random'
+
+# set default task and default training config based on task
+defaults:
+  - train: DcmmPPO
+  - hydra/job_logging: disabled
+
+# set the directory where the output files get saved
+hydra:
+  output_subdir: null
+  run:
+    dir: .

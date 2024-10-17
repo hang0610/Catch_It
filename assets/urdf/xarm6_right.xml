@@ -1,0 +1,88 @@
+<mujoco model="xarm6_right">
+    <compiler angle="radian" meshdir="../meshes/" autolimits="true"/>
+    <!-- <size njmax="500" nconmax="100" /> -->
+    <option integrator="RK4"/>
+    <asset>
+        <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3"
+        rgb2=".2 .3 .4" width="300" height="300" mark="edge" markrgb=".2 .3 .4"/>
+        <material name="grid" texture="grid" texrepeat="2 2" texuniform="true"
+        reflectance=".2"/>
+        <mesh name="base" file="base.stl" />
+        <mesh name="link1" file="link1.stl" />
+        <mesh name="link2" file="link2.stl" />
+        <mesh name="link3" file="link3.stl" />
+        <mesh name="link4" file="link4.stl" />
+        <mesh name="link5" file="link5.stl" />
+        <mesh name="link6" file="link6.stl" />
+        <mesh name="hand_link" file="hand_link.STL" />
+    </asset>
+    <default>
+        <joint damping="1"/>
+    </default>
+    <worldbody>
+        <light pos="0 0 1" mode="trackcom" diffuse="1 1 1" />
+        <geom name="ground" type="plane" pos="0 0 -.5" size="2 2 .1" material="grid" solimp=".99 .99 .01" solref=".001 1"/>
+        <body name="arm_base">
+            <geom name="arm_base" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 1" mesh="base" />
+            <geom type="mesh" rgba="1 1 1 1" mesh="base" />
+        </body>
+        <body name="link1" pos="0 0 0.267" quat="0.707388 0 0 0.706825">
+            <inertial pos="-0.002 0.02692 -0.01332" quat="0.983139 0.180751 -0.00455228 0.0272976" mass="2.16" diaginertia="0.00539487 0.00519906 0.00281397" />
+            <joint name="joint1" pos="0 0 0" axis="0 0 1" limited="true" range="-6.28319 6.28319" damping="1" frictionloss="1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 1" mesh="link1" />
+            <geom type="mesh" rgba="1 1 1 1" mesh="link1" />
+            <body name="link2" pos="0 0 0" quat="0.707105 -0.707108 0 0">
+                <inertial pos="0.03531 -0.21398 0.03386" quat="0.71118 0.614686 0.139936 -0.311132" mass="1.71" diaginertia="0.017867 0.017867 0.017867" />
+                <joint name="joint2" pos="0 0 0" axis="0 0 1" limited="true" range="-2.059 2.0944" damping="1" frictionloss="1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 1" mesh="link2" />
+                <geom type="mesh" rgba="1 1 1 1" mesh="link2" />
+                <body name="link3" pos="0.0535 -0.2845 0">
+                    <inertial pos="0.06781 0.10749 0.01457" quat="0.119516 0.409082 -0.734824 0.527638" mass="1.384" diaginertia="0.004543 0.004543 0.004543" />
+                    <joint name="joint3" pos="0 0 0" axis="0 0 1" limited="true" range="-3.927 0.19198" damping="1" frictionloss="1" />
+                    <!-- <joint name="joint3" pos="0 0 0" axis="0 0 1" limited="true" range="-3.927 2.19198" damping="1" frictionloss="1" /> -->
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 1" mesh="link3" />
+                    <geom type="mesh" rgba="1 1 1 1" mesh="link3" />
+                    <body name="link4" pos="0.0775 0.3425 0" quat="0.707105 -0.707108 0 0">
+                        <inertial pos="-0.00021 0.02578 -0.02538" quat="0.994019 0.0752563 -0.00686804 0.0788347" mass="1.115" diaginertia="0.00440091 0.00406855 0.00103407" />
+                        <joint name="joint4" pos="0 0 0" axis="0 0 1" limited="true" range="1.80 4.141" damping="1" frictionloss="1" />
+                        <!-- <joint name="joint4" pos="0 0 0" axis="0 0 1" limited="true" range="-3.14159 3.14159" damping="1" frictionloss="1" /> -->
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 1" mesh="link4" />
+                        <geom type="mesh" rgba="1 1 1 1" mesh="link4" />
+                        <body name="link5" pos="0 0 0" quat="0.707105 0.707108 0 0">
+                            <inertial pos="0.05428 0.01781 0.00543" quat="-0.0766302 0.578118 -0.269638 0.766291" mass="1.275" diaginertia="0.00289757 0.0023276 0.000951789" />
+                            <!-- <joint name="joint5" pos="0 0 0" axis="0 0 1" limited="true" range="-1.69297 3.14159" damping="1" frictionloss="1" /> -->
+                            <joint name="joint5" pos="0 0 0" axis="0 0 1" limited="true" range="0.0 2.65" damping="1" frictionloss="1" />
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 1" mesh="link5" />
+                            <geom type="mesh" rgba="1 1 1 1" mesh="link5" />
+                            <body name="link6" pos="0.076 0.097 0" quat="0.707105 -0.707108 0 0">
+                                <inertial pos="0 0.0357393 0.0336183" quat="0.661828 -0.248965 0.248965 0.661828" mass="0.525" diaginertia="0.000589682 0.000573709 0.00016656" />
+                                <joint name="joint6" pos="0 0 0" axis="0 0 1" limited="true" range="-2.35 -0.785" damping="1" frictionloss="1" />
+                                <!-- <joint name="joint6" pos="0 0 0" axis="0 0 1" limited="true" range="-2.35 1.785" damping="1" frictionloss="1" /> -->
+                                <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.753 0.753 0.753 1" mesh="link6" />
+                                <geom type="mesh" rgba="0.753 0.753 0.753 1" mesh="link6" />
+                                <geom pos="0 0.045 0.045" quat="0.500398 -0.499602 -0.5 -0.5" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.2 0.2 0.2 1" mesh="hand_link" />
+                                <geom size="0.0075 0.0425 0.015" pos="3.1829e-05 0.00503029 0.00696816" quat="0.500398 -0.499602 -0.5 -0.5" type="box" contype="0" conaffinity="0" group="1" rgba="0.46 0.46 0.46 1" />
+                                <geom size="0.0204 0.0565 0.0475" pos="3.78196e-05 -0.00249256 0.0356622" quat="0.500398 -0.499602 -0.5 -0.5" type="box" rgba="0.46 0.46 0.46 1" />
+                                
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+    <contact>
+        <!-- <exclude body1="link6" body2="link_12.0" />
+        <exclude body1="link6" body2="link_13.0" /> -->
+        <!-- <exclude body1="link_12.0" body2="link_13.0" /> -->
+    </contact>
+    <!-- Define the actuators for all the joints -->
+    <actuator> 
+        <motor joint="joint1" ctrlrange="-100 100" />
+        <motor joint="joint2" ctrlrange="-100 100" />
+        <motor joint="joint3" ctrlrange="-100 100" />
+        <motor joint="joint4" ctrlrange="-100 100" />
+        <motor joint="joint5" ctrlrange="-100 100" />
+        <motor joint="joint6" ctrlrange="-100 100" />
+    </actuator>
+</mujoco>
