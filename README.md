@@ -120,6 +120,8 @@ python3 train_DCMM.py test=True task=Catching_TwoStage num_envs=1 checkpoint_cat
 ```
 
 ## Two-Stage Training From Scratch
+**Reminder**: 
+Please check these three parameters again `num_envs * horizon_length = n * minibatch_size`, where `n` is a positive integer. 
 ### Stage 1: Tracking Task
 Under the root `catch_it`, train the base and arm to **track** the randomly thrown objects:
 ```bash
