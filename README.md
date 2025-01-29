@@ -1,5 +1,5 @@
 # [Catch It! Learning to Catch in Flight with Mobile Dexterous Hands](https://mobile-dex-catch.github.io/)
-Official implementation of [Catch It](https://arxiv.org/abs/2409.10319). 
+[ICRA 2025] Official implementation of [Catch It](https://arxiv.org/abs/2409.10319). 
 
 <div style="display: flex; align-items: center;">
     <img src="./assets/media/videos/teaser.gif" alt="teaser" style="margin-right: 10px;">
@@ -10,6 +10,7 @@ We open-source the simulation training scripts and provide guidances to the real
 This codebase is under [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/deed.en), with inherited license in [Legged Gym](training/legged_gym) and [RSL RL](training/rsl_rl) from *ETH Zurich, Nikita Rudin* and *NVIDIA CORPORATION & AFFILIATES*.
 ## News
 
+- **2025-01-29**: Our work is accepted by ICRA 2025 🎉! See you at ATL this May！
 - **2024-10-17**: Release the simulation training scripts and references for the real-robot depolyment. Have a try!
 
 # Installation
