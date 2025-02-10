@@ -7,7 +7,6 @@
 
 We open-source the simulation training scripts and provide guidances to the real-robot deployment. We name the environment with **D**exterous **C**atch with **M**obile **M**anipulation (**DCMM**).
 
-This codebase is under [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/deed.en), with inherited license in [Legged Gym](training/legged_gym) and [RSL RL](training/rsl_rl) from *ETH Zurich, Nikita Rudin* and *NVIDIA CORPORATION & AFFILIATES*.
 ## News
 
 - **2025-01-29**: Our work is accepted by ICRA 2025 🎉! See you at ATL this May！
@@ -201,3 +200,5 @@ Please consider citing our paper if you find this repo useful:
   journal={arXiv preprint arXiv:2409.10319}
 }
 ```
+# LICENSE
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
